@@ -1,0 +1,138 @@
+body{
+    font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+    font-size:13px;
+}
+div, p {
+    margin: 0;
+    padding: 0;
+}
+.centered {
+    width: 300px;
+    margin: 60px auto 30px;
+    position: relative;
+    color: #7C7075;
+}
+.centered .input-btn {
+    /* Styles */
+    padding: 8px 5px;    
+    border-radius: 5px;
+    border: 1px solid #4e3043;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+ 
+    /* Font styles */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+
+    background-image: linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -o-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -moz-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -webkit-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -ms-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.26, #3F3237),
+        color-stop(0.63, #5F5053),
+        color-stop(0.82, #7C7075)
+    );
+}
+
+.centered .status {
+    font-size: 14px;
+    margin: 0;
+    padding: 12px 0 12px 16px;
+    font-weight: normal;
+}
+
+.login-form h1 {
+    font-size: 22px;
+    padding: 6px 0;
+    margin: 0;
+}
+
+.login-form input[type=text],
+.login-form input[type=password] {
+    width: 100%;
+    padding: 8px 4px 8px 10px;
+    margin-bottom: 15px;
+    border: 1px solid #4e3043; /* Fallback */
+    border: 1px solid rgba(78,48,67, 0.8);
+    border-radius: 2px;
+}
+
+.login-form input::-webkit-input-placeholder {
+    color: rgba(37,21,26,0.5);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+ 
+.login-form input:-moz-placeholder {
+    color: rgba(37,21,26,0.5);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+ 
+.login-form input:-ms-input-placeholder {
+    color: rgba(37,21,26,0.5);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.login-form input[type=text]:hover,
+.login-form input[type=password]:hover {
+    border-color: #333;
+}
+
+.login-form .input-btn {
+    /* Size and position */
+    width: 40%;
+}
+ 
+.login-form input[type=submit]:hover {
+    box-shadow: 
+        inset 0 1px rgba(255,255,255,0.2), 
+        inset 0 20px 30px rgba(99,64,86,0.5);
+}
+
+.login-form label {
+    display: none;
+    padding: 2px 0 5px 2px;
+    cursor: pointer;
+}
+ 
+.login-form label:hover ~ input {
+    border-color: #333;
+}
+ 
+.no-placeholder .login-form label {
+    display: block;
+}
+
+/* Overridden style from jquery ui */
+.ui-widget-header {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+
+    background-image: linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -o-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -moz-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -webkit-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -ms-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.26, #3F3237),
+        color-stop(0.63, #5F5053),
+        color-stop(0.82, #7C7075)
+    );
+}
+
+.no-close .ui-dialog-titlebar-close {
+    display : none;
+}
