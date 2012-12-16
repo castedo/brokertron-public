@@ -7,9 +7,7 @@
     </head>
     <body>
         <div class="centered">
-            <div class="status" id="status-dialog"></div>
-            <button class="input-btn" id="logout-btn">Logout</button>
-            <form class="login-form">
+            <form class="action-form login-form" action="/v1/login.json" method="post">
                 <h1>Login to Brokertron Gateway for IB</h1>
                 <div>
                     <label for="login">Username</label>
@@ -21,6 +19,13 @@
                 </div>
                 <input class="input-btn" type="submit" name="submit" value="Login">
             </form>
+            <form class="action-form logout-form hide" action="/v1/logout.json" method="post">
+                <h1>Welcome <span class="logged-in-user-name"></span></h1>
+                <p class="login-success-msg">You have been successfully logged into the Brokertron Gateway for IB</p>
+                <input class="input-btn" type="submit" id="logout-btn" value="Logout">
+            </form>
+            <div class="status" id="status-dialog"></div>
+            <div class="confirm" id="confirm-dialog"></div>
         </div>
         
     <script src="./jquery-ui-1.9.2/js/jquery-1.8.3.js"></script>

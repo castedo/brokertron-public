@@ -6,11 +6,14 @@ div, p {
     margin: 0;
     padding: 0;
 }
+.hide {
+    display: none;
+}
 .centered {
     width: 300px;
     margin: 60px auto 30px;
     position: relative;
-    color: #7C7075;
+    /* color: #7C7075; */
 }
 .centered .input-btn {
     /* Styles */
@@ -49,14 +52,15 @@ div, p {
     font-weight: normal;
 }
 
-.login-form h1 {
+.centered h1 {
     font-size: 22px;
-    padding: 6px 0;
+    padding: 0 0 10px 0;
     margin: 0;
+    color: #7C7075;
 }
 
-.login-form input[type=text],
-.login-form input[type=password] {
+.action-form input[type=text],
+.action-form input[type=password] {
     width: 100%;
     padding: 8px 4px 8px 10px;
     margin-bottom: 15px;
@@ -65,48 +69,48 @@ div, p {
     border-radius: 2px;
 }
 
-.login-form input::-webkit-input-placeholder {
+.action-form input::-webkit-input-placeholder {
     color: rgba(37,21,26,0.5);
     text-shadow: 0 1px 0 rgba(255,255,255,0.15);
 }
  
-.login-form input:-moz-placeholder {
+.action-form input:-moz-placeholder {
     color: rgba(37,21,26,0.5);
     text-shadow: 0 1px 0 rgba(255,255,255,0.15);
 }
  
-.login-form input:-ms-input-placeholder {
+.action-form input:-ms-input-placeholder {
     color: rgba(37,21,26,0.5);
     text-shadow: 0 1px 0 rgba(255,255,255,0.15);
 }
 
-.login-form input[type=text]:hover,
-.login-form input[type=password]:hover {
+.action-form input[type=text]:hover,
+.action-form input[type=password]:hover {
     border-color: #333;
 }
 
-.login-form .input-btn {
+.action-form .input-btn {
     /* Size and position */
     width: 40%;
 }
  
-.login-form input[type=submit]:hover {
+.action-form input[type=submit]:hover {
     box-shadow: 
         inset 0 1px rgba(255,255,255,0.2), 
         inset 0 20px 30px rgba(99,64,86,0.5);
 }
 
-.login-form label {
+.action-form label {
     display: none;
     padding: 2px 0 5px 2px;
     cursor: pointer;
 }
  
-.login-form label:hover ~ input {
+.action-form label:hover ~ input {
     border-color: #333;
 }
  
-.no-placeholder .login-form label {
+.no-placeholder .action-form label {
     display: block;
 }
 
@@ -135,4 +139,9 @@ div, p {
 
 .no-close .ui-dialog-titlebar-close {
     display : none;
+}
+
+.action-form .login-success-msg {
+    padding: 20px 0;
+    font-size: 14px;
 }

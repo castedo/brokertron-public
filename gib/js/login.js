@@ -2,7 +2,7 @@
 
     // Constants
 
-    var LOGOUT_BTN = "#logout-btn",
+    var LOGOUT_FORM = ".logout-form",
     
         LOGIN_FORM = ".login-form",
 
@@ -14,21 +14,26 @@
 
         LOGIN_STATUS_CONNECTED = "connected",
 
-        LOGIN_STATUS_DISCONNECTED = "disconnected";
+        LOGIN_STATUS_DISCONNECTED = "disconnected",
+
+        MSG_LOGIN = "Connecting to the gateway, please wait..",
+
+        MSG_LOGOUT = "Disconnecting from the gateway, please wait..",
+
+        MSG_CONFIRM_LOGOUT = "Logout of IB Brokertron Gateway now?";
 
         
     // Login module    
     IB.Login = {
         init : function () {
+            this.statusTimer = null;
             this.initDialog();
-            $(LOGOUT_BTN).hide();
-            this.updateStatus();
             this.attachHandlers();
         },
 
         attachHandlers : function () {
-            $(LOGIN_FORM).on("submit", $.proxy(this.submitHandler, this));
-            $(LOGOUT_BTN).on("click", $.proxy(this.logoutHandler, this));
+            $(LOGIN_FORM).on("submit", $.proxy(this.login, this));
+            $(LOGOUT_FORM).on("submit", $.proxy(this.logout, this));
         },
 
         initDialog : function () {
@@ -38,11 +43,48 @@
                 autoOpen : false,
                 modal : true,
                 resizable : false,
-                draggable : false
-                });
+                draggable : false,
+                buttons : [
+                    {
+                        id : "status-dlg-cancel-btn",
+                        text : "Cancel",
+                        click : $.proxy(this.logout, this)
+                    }
+                ]
+            });
+
+            $("#confirm-dialog").dialog({
+                title : "Confirm Action",
+                dialogClass : "no-close",
+                autoOpen : false,
+                modal : true,
+                resizable : false,
+                draggable : false,
+                buttons : [
+                    {
+                        text : "Yes",
+                        click : $.proxy(this.logoutConfirm, this)
+                    },
+                    {
+                        text : "No",
+                        click : $.proxy(this.showConfirmDialog, this, false)
+                    }
+                ]
+            });
+        },
+
+        showConfirmDialog : function (show) {
+            var confirm = $("#confirm-dialog");
+            if (show) {
+                confirm.html(MSG_CONFIRM_LOGOUT);
+                confirm.dialog("open");
+            }
+            else {
+                confirm.dialog("close");
+            }
         },
         
-        submitHandler : function(e) {
+        login : function(e) {
             e.preventDefault();
             e.stopPropagation();
             var userName = $("#user-name").val(),
@@ -56,31 +98,41 @@
                     },
                     contentType: "application/x-www-form-urlencoded",
                     dataType: "json",
-                    success : $.proxy(this.loginSuccessHandler, this)
+                    success : $.proxy(this.loginSuccess, this)
                 };
             $.ajax(request);
+            this.updateStatus(MSG_LOGIN, true);
         },
 
-        loginSuccessHandler : function (data) {
+        loginSuccess : function (data) {
             this.processStatus(data);
         },
+
+        logout : function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.showConfirmDialog(true);
+        },
         
-        logoutHandler : function (e) {
+        logoutConfirm : function (e) {
+            this.showConfirmDialog(false);
             e.preventDefault();
             $.ajax({
                 type : 'POST',
                 url : '/v1/logout.json',
                 contentType: "application/x-www-form-urlencoded",
                 dataType: "json",
-                success : $.proxy(this.logoutSuccessHandler, this)
+                success : $.proxy(this.logoutSuccess, this)
             });
+            clearTimeout(this.statusTimer);
+            this.updateStatus(MSG_LOGOUT);
         },
 
-        logoutSuccessHandler : function (data) {
+        logoutSuccess : function (data) {
             this.processStatus(data);
         },
 
-        fireStatusRequest : function (ibLoginSession) {
+        getStatus : function (ibLoginSession) {
             $.ajax({
                 url : '/v1/status.json',
                 ib_login_session : ibLoginSession,
@@ -93,49 +145,62 @@
             
             switch (ibLoginSession) {
                 case LOGIN_STATUS_CONNECTING :
-                    this.updateStatus("Connecting to the gateway, please wait!");
-                    setTimeout($.proxy(this.fireStatusRequest, this), 1000);
+                    //this.updateStatus(MSG_LOGIN);
+                    this.statusTimer = setTimeout($.proxy(this.getStatus, this), 1000);
                 break;
 
                 case LOGIN_STATUS_CONNECTED:
-                    this.updateStatus("Connected!!");
-                    this.showLogoutButton(true);
+                    //this.updateStatus("Connected!!");
+                    this.updateUserName(true);
+                    this.showLogoutForm(true);
                     break;
 
                 case LOGIN_STATUS_DISCONNECTING :
-                    this.updateStatus("Disconnecting from the gateway, please wait!");
-                    setTimeout($.proxy(this.fireStatusRequest, this), 1000);
+                    //this.updateStatus(MSG_LOGOUT);
+                    this.statusTimer = setTimeout($.proxy(this.getStatus, this), 1000);
                 break;
 
                 case LOGIN_STATUS_DISCONNECTED:
-                    this.updateStatus("Disconnected!!");
-                    this.showLogoutButton(false);
+                    //this.updateStatus("Disconnected!!");
+                    this.showLogoutForm(false);
                     break;
             }
         },
 
-        showLogoutButton : function (show) {
+        showLogoutForm : function (show) {
             this.updateStatus();
             if (show) {
                 $(LOGIN_FORM).hide();
-                $(LOGOUT_BTN).show();
+                $(LOGOUT_FORM).show();
             }
             else {
                 $(LOGIN_FORM).show();
-                $(LOGOUT_BTN).hide();
+                $(LOGOUT_FORM).hide();
             }
         },
 
-        updateStatus : function (msg) {
-            var status = $(STATUS_DIALOG);
+        updateStatus : function (msg, showCancel) {
+            var status = $(STATUS_DIALOG),
+                isOpen = status.dialog("isOpen");
             if (!msg) {
                 status.dialog("close");
             }
             else {
-                //status.show();
                 status.html(msg);
-                status.dialog("open");
+                if (showCancel) {
+                    $("#status-dlg-cancel-btn").button("enable");
+                }
+                else {
+                    $("#status-dlg-cancel-btn").button("disable");
+                }
+                if (!isOpen) {
+                    status.dialog("open");
+                }
             }
+        },
+
+        updateUserName : function () {
+            $(".logged-in-user-name").html($("#user-name").val());
         }
     };
 }($));
