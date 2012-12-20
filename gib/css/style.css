@@ -1,6 +1,7 @@
 body{
     font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
-    font-size:13px;
+    font-size: 1em;
+    background-color: white;
 }
 div, p {
     margin: 0;
@@ -10,22 +11,22 @@ div, p {
     display: none;
 }
 .centered {
-    width: 300px;
-    margin: 60px auto 30px;
+    width: 23.07em;
+    margin: 4.62em auto 2.31em;
     position: relative;
     /* color: #7C7075; */
 }
 .centered .input-btn {
     /* Styles */
-    padding: 8px 5px;    
-    border-radius: 5px;
+    padding: 0.5em 0.38em;    
+    border-radius: 0.38em;
     border: 1px solid #4e3043;
     cursor: pointer;
     transition: all 0.3s ease-out;
  
     /* Font styles */
     color: white;
-    font-size: 16px;
+    font-size: 1.4em;
     font-weight: bold;
     font-family: 'Raleway', 'Lato', Arial, sans-serif;
 
@@ -46,15 +47,14 @@ div, p {
 }
 
 .centered .status {
-    font-size: 14px;
     margin: 0;
-    padding: 12px 0 12px 16px;
+    padding: 1em 0 1em 1.23em;
     font-weight: normal;
 }
 
 .centered h1 {
-    font-size: 22px;
-    padding: 0 0 10px 0;
+    font-size: 1.69em;
+    padding: 0 0 0.8em 0;
     margin: 0;
     color: #7C7075;
 }
@@ -62,11 +62,11 @@ div, p {
 .action-form input[type=text],
 .action-form input[type=password] {
     width: 100%;
-    padding: 8px 4px 8px 10px;
-    margin-bottom: 15px;
+    padding: 0.82em 0.31em 0.82em 0.77em;
+    margin-bottom: 1.16em;
     border: 1px solid #4e3043; /* Fallback */
     border: 1px solid rgba(78,48,67, 0.8);
-    border-radius: 2px;
+    border-radius: 0.5em;
 }
 
 .action-form input::-webkit-input-placeholder {
@@ -97,12 +97,12 @@ div, p {
 .action-form input[type=submit]:hover {
     box-shadow: 
         inset 0 1px rgba(255,255,255,0.2), 
-        inset 0 20px 30px rgba(99,64,86,0.5);
+        inset 0 1.53em 2.30em rgba(99,64,86,0.5);
 }
 
 .action-form label {
     display: none;
-    padding: 2px 0 5px 2px;
+    padding: 0.15em 0 0.38em 0.15em;
     cursor: pointer;
 }
  
@@ -142,6 +142,92 @@ div, p {
 }
 
 .action-form .login-success-msg {
-    padding: 20px 0;
+    padding: 1.53em 0;
     font-size: 14px;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+    /* Styles */
+    .centered {
+        width: 90%;
+        margin: 5% auto;        
+    }
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen 
+and (min-width : 321px) {
+    /* Styles */
+    .centered {
+        width: 85%;
+        margin: 5% auto;        
+    }
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 320px) {
+    /* Styles */
+    .centered {
+        width: 90%;
+        margin: 5% auto;        
+    }
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+    /* Styles */
+    .centered {
+        width: 70%;
+    }
+}
+
+/* iPads (landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {
+    /* Styles */
+    .centered {
+        width: 23em;
+    }
+}
+
+/* iPads (portrait) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {
+    /* Styles */
+    .centered {
+        width: 70%;
+    }
+}
+
+/* Desktops and laptops ----------- */
+@media only screen 
+and (min-width : 1224px) {
+    /* Styles */
+    .centered {
+        width: 23em;
+    }
+}
+
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
+}
+
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
 }

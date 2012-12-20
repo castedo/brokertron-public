@@ -4,10 +4,11 @@
         <title>Brokertron Gateway for IB :: Login</title>
         <link rel="stylesheet" href="./jquery-ui-1.9.2/css/smoothness/jquery-ui-1.9.2.custom.min.css">
         <link rel="stylesheet" href="./css/style.css">
+        <meta name="viewport" content="width=device-width, height=device-height,  initial-scale=1.0, user-scalable=no;user-scalable=0;"/>
     </head>
     <body>
         <div class="centered">
-            <form class="action-form login-form" action="/v1/login.json" method="post">
+            <form class="action-form login-form hide" action="/v1/login.json" method="post">
                 <h1>Login to Brokertron Gateway for IB</h1>
                 <div>
                     <label for="login">Username</label>
@@ -24,7 +25,7 @@
                 <p class="login-success-msg">You have been successfully logged into the Brokertron Gateway for IB</p>
                 <input class="input-btn" type="submit" id="logout-btn" value="Logout">
             </form>
-            <div class="status" id="status-dialog"></div>
+            <div class="status" id="status-dialog">Please wait...<br><br>Processing the status information</div>
             <div class="confirm" id="confirm-dialog"></div>
         </div>
         

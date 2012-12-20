@@ -20,15 +20,19 @@
 
         MSG_LOGOUT = "Disconnecting from the gateway, please wait..",
 
-        MSG_CONFIRM_LOGOUT = "Logout of IB Brokertron Gateway now?";
+        MSG_CONFIRM_LOGOUT = "Logout of IB Brokertron Gateway now?",
+
+        MAX_ATTEMPTS = 10;
 
         
     // Login module    
     IB.Login = {
         init : function () {
+            this.numOfAttempts = 0;
             this.statusTimer = null;
             this.initDialog();
             this.attachHandlers();
+            this.getStatus();
         },
 
         attachHandlers : function () {
@@ -116,7 +120,9 @@
         
         logoutConfirm : function (e) {
             this.showConfirmDialog(false);
-            e.preventDefault();
+            if (e) {
+                e.preventDefault();
+            }
             $.ajax({
                 type : 'POST',
                 url : '/v1/logout.json',
@@ -133,9 +139,16 @@
         },
 
         getStatus : function (ibLoginSession) {
+            if (LOGIN_STATUS_DISCONNECTING !== ibLoginSession) {
+                this.numOfAttempts++;
+                if (this.numOfAttempts > MAX_ATTEMPTS) {
+                    this.logoutConfirm();
+                    this.numOfAttempts = 0;
+                    return false;
+                }
+            }
             $.ajax({
                 url : '/v1/status.json',
-                ib_login_session : ibLoginSession,
                 success : $.proxy(this.processStatus, this)
             });
         },
@@ -145,8 +158,8 @@
             
             switch (ibLoginSession) {
                 case LOGIN_STATUS_CONNECTING :
-                    //this.updateStatus(MSG_LOGIN);
-                    this.statusTimer = setTimeout($.proxy(this.getStatus, this), 1000);
+                    this.updateStatus(MSG_LOGIN, true);
+                    this.statusTimer = setTimeout($.proxy(this.getStatus, this, ibLoginSession), 2000);
                 break;
 
                 case LOGIN_STATUS_CONNECTED:
@@ -156,8 +169,8 @@
                     break;
 
                 case LOGIN_STATUS_DISCONNECTING :
-                    //this.updateStatus(MSG_LOGOUT);
-                    this.statusTimer = setTimeout($.proxy(this.getStatus, this), 1000);
+                    this.updateStatus(MSG_LOGOUT);
+                    this.statusTimer = setTimeout($.proxy(this.getStatus, this, ibLoginSession), 2000);
                 break;
 
                 case LOGIN_STATUS_DISCONNECTED:
@@ -168,7 +181,6 @@
         },
 
         showLogoutForm : function (show) {
-            this.updateStatus();
             if (show) {
                 $(LOGIN_FORM).hide();
                 $(LOGOUT_FORM).show();
@@ -177,6 +189,7 @@
                 $(LOGIN_FORM).show();
                 $(LOGOUT_FORM).hide();
             }
+            this.updateStatus();
         },
 
         updateStatus : function (msg, showCancel) {
