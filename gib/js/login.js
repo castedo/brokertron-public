@@ -16,11 +16,11 @@
 
         LOGIN_STATUS_DISCONNECTED = "disconnected",
 
-        MSG_LOGIN = "Connecting to the gateway, please wait..",
+        MSG_LOGIN = "Logging into Interactive Brokers, please wait..",
 
-        MSG_LOGOUT = "Disconnecting from the gateway, please wait..",
+        MSG_LOGOUT = "Logging out of Interactive Brokers, please wait..",
 
-        MSG_CONFIRM_LOGOUT = "Logout of IB Brokertron Gateway now?",
+        MSG_CONFIRM_LOGOUT = "Logout of Interactive Brokers now?",
 
         MAX_ATTEMPTS = 10;
 
