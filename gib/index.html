@@ -1,32 +1,54 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 8 ]> <html class="ie ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><html><![endif]-->
     <head>
-        <title>Brokertron Gateway for IB :: Login</title>
+        <title>Interactive Brokers Login</title>
         <link rel="stylesheet" href="./jquery-ui-1.9.2/css/smoothness/jquery-ui-1.9.2.custom.min.css">
         <link rel="stylesheet" href="./css/style.css">
-        <meta name="viewport" content="width=device-width, height=device-height,  initial-scale=1.0, user-scalable=no;user-scalable=0;"/>
+        <meta name="viewport" content="width=device-width, height=device-height,  initial-scale=1.0, user-scalable=no; user-scalable=0;"/>
     </head>
     <body>
         <div class="centered">
+            <!-- Login form -->
             <form class="action-form login-form hide" action="/v1/login.json" method="post">
                 <h1>Interactive Brokers Login</h1>
                 <div>
                     <label for="login">IB Username</label>
-                    <input type="text" name="user-name" id="user-name" placeholder="Username" required>
+                    <input type="text" name="user-name" id="user-name" placeholder="IB Username" required>
                 </div>
                 <div>
                     <label for="password">IB Password</label>
-                    <input type="password" name="password" id="password" placeholder="Password" required> 
+                    <input type="password" name="password" id="password" placeholder="IB Password" required> 
                 </div>
                 <input class="input-btn" type="submit" name="submit" value="Login">
             </form>
+            <!-- Logout form -->
             <form class="action-form logout-form hide" action="/v1/logout.json" method="post">
                 <h1>Welcome <span class="logged-in-user-name"></span></h1>
-                <p class="login-success-msg">You have been successfully logged into Interactive Brokers</p>
+                <p class="login-success-msg">You have been successfully logged into the Interactive Brokers</p>
                 <input class="input-btn" type="submit" id="logout-btn" value="Logout">
             </form>
-            <div class="status" id="status-dialog">Please wait...<br><br>Processing the status information</div>
-            <div class="confirm" id="confirm-dialog"></div>
+            <!-- Status dialog -->
+            <div class="dlg status spinner" id="status-dialog">
+                <p class="text">Processing the status information..</p>
+                <div class="action-bar">
+                    <input class="input-btn cancel-btn hide" type="button" name="submit" value="Cancel">
+                </div>
+            </div>
+            <!-- Confirmation dialog -->
+            <div class="dlg confirm hide" id="confirm-dialog">
+                <p class="text"></p>
+                <div class="action-bar">
+                    <input class="input-btn yes-btn" type="button" name="submit" value="Yes">
+                    <input class="input-btn no-btn" type="button" name="submit" value="No">
+                </div>
+            </div>
+            <!-- Popups -->
+            <div id="popups" class="popups"></div>
+            <!-- Timestamp -->
+            <div id="timestamp" class="timestamp hide"><p class="text"></p></div>
         </div>
         
     <script src="./jquery-ui-1.9.2/js/jquery-1.8.3.js"></script>

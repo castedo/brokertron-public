@@ -2,34 +2,134 @@ body{
     font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
     font-size: 1em;
     background-color: white;
+    color: #7C7075;
 }
+
 div, p {
     margin: 0;
     padding: 0;
 }
+
 .hide {
     display: none;
 }
+
 .centered {
     width: 23.07em;
+    min-height: 19em;
     margin: 4.62em auto 2.31em;
     position: relative;
     /* color: #7C7075; */
+    -moz-box-shadow: 0 0 1em 0.2em #CCC;
+    -webkit-box-shadow: 0 0 1em 0.2em #CCC;
+    box-shadow: 0 0 1em 0.2em #CCC;
 }
+
+.ie7 .centered,
+.ie8 .centered {
+    min-height: 21.5em;
+    border: 1px solid #7C7075;
+}
+
+.ie7 .centered,
+.ie9 .centered {
+    min-height: 23.5em;
+}
+
 .centered .input-btn {
-    /* Styles */
-    padding: 0.5em 0.38em;    
+    padding: 0.32em 0.38em;    
     border-radius: 0.38em;
+    background-color: #3F3237;
     border: 1px solid #4e3043;
     cursor: pointer;
     transition: all 0.3s ease-out;
- 
-    /* Font styles */
     color: white;
-    font-size: 1.4em;
+    font-size: 1.2em;
     font-weight: bold;
     font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    background-image: linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -o-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -moz-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -webkit-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -ms-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.26, #3F3237),
+        color-stop(0.63, #5F5053),
+        color-stop(0.82, #7C7075)
+    );
+}
 
+.centered .popups {
+    font-size: 0.75em;
+    padding-top: 15.2em;
+    padding-bottom: 2.1em; 
+}
+
+.centered .popups h3 {
+    border: 1px solid #4e3043;
+    cursor: pointer;
+    color: white;
+    background-image: linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -o-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -moz-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -webkit-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -ms-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.26, #3F3237),
+        color-stop(0.63, #5F5053),
+        color-stop(0.82, #7C7075)
+    ); 
+}
+
+.centered .dlg {
+    text-align: center;
+    margin-left: -11em;
+    padding: 1em 0 1em 0;
+    font-weight: normal;
+    position: absolute;
+    top: 4em;
+    left: 50%;
+    width: 100%;
+}
+
+.centered .dlg .input-btn {
+    padding: 0.32em 1em;    
+    border-radius: 0.2em;
+    font-size: 1em;
+}
+
+.centered .dlg .text {
+    padding: 1em 0;    
+}
+
+.centered .spinner {
+    background: url(../images/252.gif) no-repeat 50% 0;
+}
+
+.centered h1 {
+    font-size: 1.69em;
+    padding: 0 0 0.8em 0;
+    margin: 0;
+    color: #7C7075;
+}
+
+.centered .timestamp {
+    padding: 0;
+    border-top: 1px solid #CCC;
+    background-color: #3F3237;
+    min-height: 2em;
+    font-size: 0.7em;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: white;
     background-image: linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
     background-image: -o-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
     background-image: -moz-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
@@ -46,22 +146,18 @@ div, p {
     );
 }
 
-.centered .status {
-    margin: 0;
-    padding: 1em 0 1em 1.23em;
-    font-weight: normal;
+.centered .timestamp .text {
+    margin: 0.4em 1.6em;
 }
 
-.centered h1 {
-    font-size: 1.69em;
-    padding: 0 0 0.8em 0;
-    margin: 0;
-    color: #7C7075;
+.action-form {
+    padding: 1em;
+    position: absolute;
 }
 
 .action-form input[type=text],
 .action-form input[type=password] {
-    width: 100%;
+    width: 96%;
     padding: 0.82em 0.31em 0.82em 0.77em;
     margin-bottom: 1.16em;
     border: 1px solid #4e3043; /* Fallback */
@@ -110,7 +206,7 @@ div, p {
     border-color: #333;
 }
  
-.no-placeholder .action-form label {
+.ie .action-form label {
     display: block;
 }
 
@@ -143,7 +239,6 @@ div, p {
 
 .action-form .login-success-msg {
     padding: 1.53em 0;
-    font-size: 14px;
 }
 
 /* Smartphones (portrait and landscape) ----------- */
@@ -153,7 +248,7 @@ and (max-device-width : 480px) {
     /* Styles */
     .centered {
         width: 90%;
-        margin: 5% auto;        
+        margin: 2% 5%;        
     }
 }
 
@@ -162,8 +257,12 @@ and (max-device-width : 480px) {
 and (min-width : 321px) {
     /* Styles */
     .centered {
-        width: 85%;
-        margin: 5% auto;        
+        width: 96%;
+        margin: 2% 2%;
+    }
+    .centered .dlg {
+        top: 5em;
+        margin-left: -14em;
     }
 }
 
@@ -172,8 +271,29 @@ and (min-width : 321px) {
 and (max-width : 320px) {
     /* Styles */
     .centered {
-        width: 90%;
-        margin: 5% auto;        
+        width: 95%;
+        margin: 5% 3%;        
+    }
+
+    .centered .dlg {
+        top: 5em;
+        left: 0;
+        margin-left: 0;
+    }
+}
+
+/* Custom width ----------- */
+@media only screen 
+and (min-width : 481px) {
+    /* Styles */
+    .centered {
+        width: 23em;
+        margin: 4.62em auto 2.31em;
+    }
+    .centered .dlg {
+        margin-left: -11em;
+        left: 50%;
+        top: 5em;
     }
 }
 
@@ -182,9 +302,6 @@ and (max-width : 320px) {
 and (min-device-width : 768px) 
 and (max-device-width : 1024px) {
     /* Styles */
-    .centered {
-        width: 70%;
-    }
 }
 
 /* iPads (landscape) ----------- */
@@ -193,9 +310,6 @@ and (min-device-width : 768px)
 and (max-device-width : 1024px) 
 and (orientation : landscape) {
     /* Styles */
-    .centered {
-        width: 23em;
-    }
 }
 
 /* iPads (portrait) ----------- */
@@ -204,18 +318,12 @@ and (min-device-width : 768px)
 and (max-device-width : 1024px) 
 and (orientation : portrait) {
     /* Styles */
-    .centered {
-        width: 70%;
-    }
 }
 
 /* Desktops and laptops ----------- */
 @media only screen 
 and (min-width : 1224px) {
     /* Styles */
-    .centered {
-        width: 23em;
-    }
 }
 
 /* iPhone 4 ----------- */
