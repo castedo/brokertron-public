@@ -254,7 +254,11 @@
         
         showTimestamp : function (msg) {
             var timestamp = $(".timestamp"),
+                months = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                                   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"),
                 d = new Date(),
+                month = months[d.getMonth()],
+                day = d.getDate(),
                 hrs = d.getHours(),
                 mins = d.getMinutes(),
                 amPm = hrs > 12 ? 'PM' : 'AM',
@@ -264,9 +268,9 @@
             if (hrs === 0) {
                 hrs = 12;
             }
-            hrs = this.lpad(hrs.toString(), 2);
+            hrs = hrs.toString();
             mins = this.lpad(mins.toString(), 2);
-            timeString = hrs + ":" + mins + ' ' + amPm;
+            timeString = month + " " + day + " " + hrs + ":" + mins + ' ' + amPm;
 
             timestamp.removeClass('hide');
             timestamp.find(".text").html("As of " + timeString + " - " + msg);
