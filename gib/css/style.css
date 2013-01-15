@@ -10,6 +10,14 @@ div, p {
     padding: 0;
 }
 
+a {
+    text-decoration: none;
+}
+
+a:link, a:visited, a:active {
+    color: inherit;
+}
+
 .hide {
     display: none;
 }
@@ -120,16 +128,20 @@ div, p {
     color: #7C7075;
 }
 
-.centered .timestamp {
+.centered .bottom-bars {
     padding: 0;
-    border-top: 1px solid #CCC;
-    background-color: #3F3237;
-    min-height: 2em;
     font-size: 0.7em;
     position: absolute;
     bottom: 0;
     width: 100%;
     color: white;
+}
+
+.centered .timestamp {
+    border-top: 1px solid #CCC;
+    background-color: #3F3237;
+    min-height: 2em;
+    width: 100%;
     background-image: linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
     background-image: -o-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
     background-image: -moz-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
@@ -148,6 +160,39 @@ div, p {
 
 .centered .timestamp .text {
     margin: 0.4em 1.6em;
+}
+
+.centered .support-links {
+    border-top: 1px solid #CCC;
+    background-color: #3F3237;
+    min-height: 2em;
+    width: 100%;
+    background-image: linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -o-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -moz-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -webkit-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+    background-image: -ms-linear-gradient(bottom, #3F3237 26%, #5F5053 63%, #7C7075 82%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.26, #3F3237),
+        color-stop(0.63, #5F5053),
+        color-stop(0.82, #7C7075)
+    );
+}
+
+.centered .support-links .text {
+    margin: 0.4em 1.6em;
+}
+
+.centered .support-links a {
+    margin: 0 3em 0 0;
+}
+
+.centered .support-links a:hover {
+    color: #CCC;
 }
 
 .action-form {
