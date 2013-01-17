@@ -3,21 +3,21 @@
     // Constants
 
     var LOGOUT_FORM = ".logout-form",
-    
+
         LOGIN_FORM = ".login-form",
 
         STATUS_DIALOG = "#status-dialog",
-        
+
         CONFIRM_DIALOG = "#confirm-dialog",
 
         LOGIN_STATUS_CONNECTING = "connecting",
-        
+
         LOGIN_STATUS_DISCONNECTING = "disconnecting",
 
         LOGIN_STATUS_CONNECTED = "connected",
 
         LOGIN_STATUS_DISCONNECTED = "disconnected",
-        
+
         MSG_TIMESTAMP_CONNECTED = "Connected",
 
         MSG_TIMESTAMP_DISCONNECTED = "Disconnected",
@@ -36,8 +36,8 @@
 
         POPUPS = '#popups';
 
-        
-    //  Login module    
+
+    //  Login module
     IB.Login = {
         init : function () {
             this.numOfAttempts = 0;
@@ -45,6 +45,7 @@
             this.getStatus();
             this.attachHandlers();
             this.initDialog();
+            this.cache(false);
         },
 
         attachHandlers : function () {
@@ -62,11 +63,6 @@
             cancelButton.on("click", $.proxy(this.logoutConfirm, this));
             yesButton.on("click", $.proxy(this.logoutConfirm, this));
             noButton.on("click", $.proxy(this.showConfirmDialog, this, false));
-            $(POPUPS).accordion({
-                heightStyle: "content",
-                collapsible: true,
-                header: "h3"
-            });
         },
 
         showConfirmDialog : function (show) {
@@ -81,7 +77,7 @@
                 confirm.hide(SHOW_HIDE_INTERVAL);
             }
         },
-        
+
         login : function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -111,7 +107,7 @@
             e.stopPropagation();
             this.showConfirmDialog(true);
         },
-        
+
         logoutConfirm : function (e) {
             this.abort();
             this.hidePopups();
@@ -152,7 +148,7 @@
         processStatus : function (data) {
             var ibLoginSession = data.ib_login_session,
                 popups = data.popups;
-            
+
             switch (ibLoginSession) {
                 case LOGIN_STATUS_CONNECTING :
                     this.updateStatus(MSG_LOGIN, true);
@@ -181,29 +177,36 @@
         },
 
         getPopupContent : function (title, content) {
-            return '<h3>'+title+'</h3><div><p>'+content+'</p></div>';
+            return '<h3 class="head">'+title+'</h3><p class="content">'+content+'</p>';
         },
-        
+
+        joinContent : function (content) {
+            var i,
+                parsed = [],
+                line;
+            for (i in content) {
+                line = content[i];
+                if (line && typeof line === 'string') {
+                    parsed.push(line);
+                }
+            }
+            return parsed.join('<br>');
+        },
+
         showPopups : function (popups) {
-            var popupContainer = $(POPUPS),
-                content = "",
+            var content = "",
                 popup,
                 i;
             for (i in popups) {
                 popup = popups[i];
-                content += this.getPopupContent(popup.title, popup.content.join('<br>'));
+                content += this.getPopupContent(popup.title, this.joinContent(popup.content));
             }
-            popupContainer.html("");
-            popupContainer.append(content);
-            popupContainer.accordion('destroy').accordion({ heightStyle: "content" });
-            popupContainer.accordion('option', 'active', false);
-            popupContainer.accordion('option', 'active', -1);
+            $(POPUPS).html(content);
+            $(POPUPS).show(SHOW_HIDE_INTERVAL);
         },
-        
+
         hidePopups : function () {
-            var popupContainer = $(POPUPS);
-            popupContainer.html("");
-            popupContainer.accordion('refresh');            
+            $(POPUPS).hide(SHOW_HIDE_INTERVAL);
         },
 
         showLogoutForm : function (show) {
@@ -251,10 +254,13 @@
                 str = padString + str;
             return str;
         },
-        
+
         showTimestamp : function (msg) {
             var timestamp = $(".timestamp"),
+                months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                 d = new Date(),
+                month = months[d.getMonth()],
+                day = d.getDate(),
                 hrs = d.getHours(),
                 mins = d.getMinutes(),
                 amPm = hrs > 12 ? 'PM' : 'AM',
@@ -264,12 +270,23 @@
             if (hrs === 0) {
                 hrs = 12;
             }
-            hrs = this.lpad(hrs.toString(), 2);
+            hrs = hrs.toString();
             mins = this.lpad(mins.toString(), 2);
-            timeString = hrs + ":" + mins + ' ' + amPm;
+            timeString = month + " " + day + " " + hrs + ":" + mins + ' ' + amPm;
 
             timestamp.removeClass('hide');
             timestamp.find(".text").html("As of " + timeString + " - " + msg);
+        },
+
+        cache : function (status) {
+            if (status === false) {
+                $.ajaxSetup({
+                    headers: { "cache-control": "no-cache" }
+                });
+            }
+            else {
+                $.ajaxSetup({});
+            }
         },
 
         send : function (request) {

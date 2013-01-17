@@ -5,9 +5,8 @@
 <!--[if (gt IE 9)|!(IE)]><html><![endif]-->
     <head>
         <title>Interactive Brokers Login</title>
-        <link rel="stylesheet" href="./jquery-ui-1.9.2/css/smoothness/jquery-ui-1.9.2.custom.min.css">
         <link rel="stylesheet" href="./css/style.css">
-        <meta name="viewport" content="width=device-width, height=device-height,  initial-scale=1.0, user-scalable=no; user-scalable=0;"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     </head>
     <body>
         <div class="centered">
@@ -20,7 +19,7 @@
                 </div>
                 <div>
                     <label for="password">IB Password</label>
-                    <input type="password" name="password" id="password" placeholder="IB Password" required> 
+                    <input type="password" name="password" id="password" placeholder="IB Password" required>
                 </div>
                 <input class="input-btn" type="submit" name="submit" value="Login">
             </form>
@@ -46,13 +45,17 @@
                 </div>
             </div>
             <!-- Popups -->
-            <div id="popups" class="popups"></div>
+            <div id="popups" class="popups accordion"></div>
             <!-- Timestamp -->
             <div id="timestamp" class="timestamp hide"><p class="text"></p></div>
+            <!-- Support links -->
+            <div class="support-links">
+                <a id="help-link" target="gib_help" title="Brokertron Gateway for IB Help" href="http://www.brokertron.com/gateway/help.html">Help</a> |
+                <a id="webapi-link" title="Brokertron Gateway for IB - Old API" href="webapi.html">Web API</a>
+            </div>
         </div>
-        
-    <script src="./jquery-ui-1.9.2/js/jquery-1.8.3.js"></script>
-    <script src="./jquery-ui-1.9.2/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="./js/ib.js"></script>
     <script src="./js/login.js"></script>
     <script type="text/javascript">
