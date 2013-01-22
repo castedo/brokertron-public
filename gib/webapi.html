@@ -9,6 +9,9 @@ body {
 div {
   text-align: center;
 }
+fieldset {
+  margin: 0.5em 0;
+}
 </style>
 <title>Brokertron Gateway for IB</title>
 </head>
@@ -20,45 +23,52 @@ div {
   <li><a href="webapi_frameset.html" target="_top">Web API Framed View</a></li>
 </ul>
 
-<hr>
-
-
-<div><a href="/v1/status.json.txt" target="output">Status</a></div>
-
-<hr>
-
-<form action="/v1/login.json.txt" method="post" target="output" autocomplete="off">
 <fieldset>
+<legend>GET /v2/status.json</legend>
+<div><a href="/v2/status.json.txt" target="output">Status</a></div>
+</fieldset>
+
+<form action="/v2/dismiss_popup.json.txt" method="post" target="output">
+<fieldset>
+<legend>POST /v2/dismiss_popup.json</legend>
+<div>wid/key<input type="text" name="wid"/></div>
+<div><input type="submit" value="Dismiss"/></div>
+</fieldset>
+</form>
+
+<form action="/v2/login.json.txt" method="post" target="output">
+<fieldset>
+<legend>POST /v2/login.json</legend>
 <div>IB Username <input type="text" name="username"/></div>
 <div>IB Password <input type="password" name="password"/></div>
 <div><input type="submit" value="Login"/></div>
 </fieldset>
 </form>
 
-<hr>
-
-<div><a href="/v2/challenge.png" target="output">Challenge Image</a></div>
-
-<hr>
-
-<form action="/v1/response.json.txt" method="post" target="output" autocomplete="off">
 <fieldset>
+<legend>GET /v2/challenge.png</legend>
+<div><a href="/v2/challenge.png" target="output">Challenge Image</a></div>
+</fieldset>
+
+<form action="/v2/response.json.txt" method="post" target="output">
+<fieldset>
+<legend>POST /v2/response.json</legend>
 <div>Security Response <input type="text" name="response"/></div>
 <div><input type="submit" value="Respond"/></div>
 </fieldset>
 </form>
 
-<hr>
-
-<form action="/v1/logout.json.txt" method="post" target="output">
+<form action="/v2/logout.json.txt" method="post" target="output">
 <fieldset>
+<legend>POST /v2/logout.json</legend>
 <div><input type="submit" value="Logout"/></div>
 </fieldset>
 </form>
 
-<hr>
-
+<fieldset>
+<legend>GET /vx/internals.json</legend>
 <div><a href="/vx/internals.json.txt" target="output">Internals</a></div>
+</fieldset>
 
 </body>
 </html>
