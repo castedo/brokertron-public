@@ -70,7 +70,7 @@ a:link, a:visited, a:active {
     );
 }
 
-.centered .popups {
+.centered .logs {
     font-size: 0.75em;
     padding: 15.2em 0.3em 2.1em 0.3em;
 }
@@ -206,19 +206,15 @@ a:link, a:visited, a:active {
 }
 
 .action-form .login-success-msg {
-    padding: 1.53em 0;
+    padding: 0 0 1.23em 0;
 }
 
 .ie .action-form label {
     display: block;
 }
 
-.accordion .head {
+.dialog .head {
     margin: 0.5em 0 0 0;
-    padding: 0.3em 0 0.3em 1em;
-    color: white;
-    font-size: 1.2em;
-    font-weight: bold;
     background-color: #7C7075;
     background-image: linear-gradient(bottom, #3F3237 26%, #7C7075 82%);
     background-image: -o-linear-gradient(bottom, #3F3237 26%, #7C7075 82%);
@@ -238,13 +234,38 @@ a:link, a:visited, a:active {
     border-top-right-radius: 0.2em;
     border-left: 1px solid #7C7075;
     border-right: 1px solid #7C7075;
+    position: relative;
 }
 
-.accordion .content {
+.dialog .head .title {
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 0.3em 2em 0.3em 1.5em;
+    background: transparent;
+    margin: 0;
+}
+
+.dialog .head .close {
+    border: 2px solid white;
+    padding: 0.002em 0.45em 0.22em 0.55em;
+    position: absolute;
+    top: 2%;
+    right: 0.1em;
+    border-radius: 0.55em;
+    font-size: 0.98em;
+    font-weight: normal;
+}
+
+.dialog .content {
     padding: 0.5em 0 0.5em 0.8em;
     margin: 0;
     border: 1px solid #7C7075;
     border-top: 0;
+}
+
+.mlog .dialog .content {
+    color: red;
 }
 
 /* Smartphones (portrait and landscape) ----------- */

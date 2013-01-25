@@ -34,35 +34,42 @@
 
         STATUS_REQUEST_INTERVAL = 2000,
 
-        POPUPS = '#popups';
+        POPUPS = '#popups',
+
+        M_LOG = '#mlog';
 
 
     //  Login module
     IB.Login = {
         init : function () {
-            this.numOfAttempts = 0;
+            this.attempts = 0;
             this.statusTimer = null;
             this.getStatus();
-            this.attachHandlers();
-            this.initDialog();
-            this.cache(false);
+            this.handlers();
+            this.popups();
+            IB.Util.Xhr.cache(false);
         },
 
-        attachHandlers : function () {
-            $(LOGIN_FORM).on("submit", $.proxy(this.login, this));
-            $(LOGOUT_FORM).on("submit", $.proxy(this.logout, this));
-        },
-
-        initDialog : function () {
+        handlers : function () {
             var status = $(STATUS_DIALOG),
                 confirm = $(CONFIRM_DIALOG),
                 cancelButton = status.find(".cancel-btn"),
                 yesButton = confirm.find(".yes-btn"),
                 noButton = confirm.find(".no-btn");
 
+            $(LOGIN_FORM).on("submit", $.proxy(this.login, this));
+            $(LOGOUT_FORM).on("submit", $.proxy(this.logout, this));
+
             cancelButton.on("click", $.proxy(this.logoutConfirm, this));
             yesButton.on("click", $.proxy(this.logoutConfirm, this));
             noButton.on("click", $.proxy(this.showConfirmDialog, this, false));
+        },
+
+        popups : function () {
+            this.popup = IB.UI.Widgets.Popup();
+            this.popup.init(POPUPS);
+            this.mLog = IB.UI.Widgets.Popup();
+            this.mLog.init(M_LOG);
         },
 
         showConfirmDialog : function (show) {
@@ -85,7 +92,7 @@
                 passwd = $("#password").val(),
                 request = {
                     type : 'POST',
-                    url : '/v1/login.json',
+                    url : '/v2/login.json',
                     data : {
                         username : userName,
                         password : passwd
@@ -94,7 +101,7 @@
                     dataType: "json",
                     success : $.proxy(this.loginSuccess, this)
                 };
-            this.send(request);
+            IB.Util.Xhr.send(request);
             this.updateStatus(MSG_LOGIN, true);
         },
 
@@ -109,15 +116,16 @@
         },
 
         logoutConfirm : function (e) {
-            this.abort();
-            this.hidePopups();
+            IB.Util.Xhr.abort();
+            this.popup.hide();
+            this.mLog.hide();
             $(CONFIRM_DIALOG).hide(SHOW_HIDE_INTERVAL);
             if (e) {
                 e.preventDefault();
             }
-            this.send({
+            IB.Util.Xhr.send({
                 type : 'POST',
-                url : '/v1/logout.json',
+                url : '/v2/logout.json',
                 contentType: "application/x-www-form-urlencoded",
                 dataType: "json",
                 success : $.proxy(this.logoutSuccess, this)
@@ -132,30 +140,33 @@
 
         getStatus : function (ibLoginSession) {
             if (LOGIN_STATUS_DISCONNECTING !== ibLoginSession) {
-                this.numOfAttempts++;
-                if (this.numOfAttempts > MAX_ATTEMPTS) {
+                this.attempts++;
+                if (this.attempts > MAX_ATTEMPTS) {
                     this.logoutConfirm();
-                    this.numOfAttempts = 0;
+                    this.attempts = 0;
                     return false;
                 }
             }
-            this.send({
-                url : '/v1/status.json',
+            IB.Util.Xhr.send({
+                url : '/v2/status.json',
                 success : $.proxy(this.processStatus, this)
             });
         },
 
         processStatus : function (data) {
             var ibLoginSession = data.ib_login_session,
-                popups = data.popups;
+                popups = data.popups,
+                mLog = data.mlog ? data.mlog.flagged : [];
 
             switch (ibLoginSession) {
                 case LOGIN_STATUS_CONNECTING :
                     this.updateStatus(MSG_LOGIN, true);
                     this.statusTimer = setTimeout($.proxy(this.getStatus, this, ibLoginSession), STATUS_REQUEST_INTERVAL);
-                break;
+                    break;
 
                 case LOGIN_STATUS_CONNECTED:
+                    this.popup.destroy();
+                    this.mLog.destroy();
                     this.showTimestamp(MSG_TIMESTAMP_CONNECTED);
                     this.updateUserName(true);
                     this.showLogoutForm(true);
@@ -164,53 +175,26 @@
                 case LOGIN_STATUS_DISCONNECTING :
                     this.updateStatus(MSG_LOGOUT);
                     this.statusTimer = setTimeout($.proxy(this.getStatus, this, ibLoginSession), STATUS_REQUEST_INTERVAL);
-                break;
+                    break;
 
                 case LOGIN_STATUS_DISCONNECTED:
+                    this.popup.destroy();
+                    this.mLog.destroy();
                     this.showTimestamp(MSG_TIMESTAMP_DISCONNECTED);
                     this.showLogoutForm(false);
                     break;
             }
             if (popups) {
-                this.showPopups(popups);
+                this.popup.render(popups);
             }
-        },
-
-        getPopupContent : function (title, content) {
-            return '<h3 class="head">'+title+'</h3><p class="content">'+content+'</p>';
-        },
-
-        joinContent : function (content) {
-            var i,
-                parsed = [],
-                line;
-            for (i in content) {
-                line = content[i];
-                if (line && typeof line === 'string') {
-                    parsed.push(line);
-                }
+            if (mLog && mLog.length > 0) {
+                this.mLog.render(mLog);
             }
-            return parsed.join('<br>');
-        },
-
-        showPopups : function (popups) {
-            var content = "",
-                popup,
-                i;
-            for (i in popups) {
-                popup = popups[i];
-                content += this.getPopupContent(popup.title, this.joinContent(popup.content));
-            }
-            $(POPUPS).html(content);
-            $(POPUPS).show(SHOW_HIDE_INTERVAL);
-        },
-
-        hidePopups : function () {
-            $(POPUPS).hide(SHOW_HIDE_INTERVAL);
         },
 
         showLogoutForm : function (show) {
-            this.hidePopups();
+            this.popup.hide();
+            this.mLog.hide();
             if (show) {
                 $(LOGIN_FORM).hide();
                 $(LOGOUT_FORM).show();
@@ -248,55 +232,11 @@
             $(".logged-in-user-name").html($("#user-name").val());
         },
 
-        lpad : function (str, length, padString) {
-            padString = padString || '0';
-            while (str.length < length)
-                str = padString + str;
-            return str;
-        },
-
         showTimestamp : function (msg) {
             var timestamp = $(".timestamp"),
-                months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                d = new Date(),
-                month = months[d.getMonth()],
-                day = d.getDate(),
-                hrs = d.getHours(),
-                mins = d.getMinutes(),
-                amPm = hrs > 12 ? 'PM' : 'AM',
-                timeString = '';
-
-            hrs = hrs % 12;
-            if (hrs === 0) {
-                hrs = 12;
-            }
-            hrs = hrs.toString();
-            mins = this.lpad(mins.toString(), 2);
-            timeString = month + " " + day + " " + hrs + ":" + mins + ' ' + amPm;
-
+                timeString = IB.Util.String.formatDate(new Date());
             timestamp.removeClass('hide');
             timestamp.find(".text").html("As of " + timeString + " - " + msg);
-        },
-
-        cache : function (status) {
-            if (status === false) {
-                $.ajaxSetup({
-                    headers: { "cache-control": "no-cache" }
-                });
-            }
-            else {
-                $.ajaxSetup({});
-            }
-        },
-
-        send : function (request) {
-            this.request = $.ajax(request);
-        },
-
-        abort : function () {
-            if (this.request) {
-                this.request.abort();
-            }
         }
     };
 }($));
