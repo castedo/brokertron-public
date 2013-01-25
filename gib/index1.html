@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Interactive Brokers Login</title>
+        <!-- link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:light&v1' rel='stylesheet' type='text/css' -->
+        <link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css' rel='stylesheet' type='text/css'>
+        <!-- link href='http://bootswatch.com/cyborg/bootstrap.min.css' rel='stylesheet' type='text/css' -->
+        <link rel="stylesheet" href="./css/style1.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="center">Interactive Brokers</h1>
+
+            <div class="center">
+                <!-- Support links -->
+                <ul class="nav nav-pills pull-right support-links">
+                    <li>
+                        <a id="help-link" target="gib_help" title="Brokertron Gateway for IB Help" href="http://www.brokertron.com/gateway/help.html">Help</a>
+                    </li>
+                    <li>
+                        <a id="webapi-link" title="Brokertron Gateway for IB - API View" href="webapi.html">Web API</a>
+                    </li>
+                    <li>
+                        <a id="log-link" target="_blank" title="Message log" href="/v2/status.json.txt">Log</a>
+                    </li>
+                </ul>
+                <hr></hr>
+            </div>
+
+            <!-- div class="ruler"></div -->
+                <!-- div class="center">
+                    <form>
+                        <p class="lead">Login</p>
+                        <fieldset>
+                            <label for="login">Username</label>
+                            <input type="text" name="user-name" id="user-name" placeholder="Username" required>
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" placeholder="Password" required>
+                            <label></label>
+                            <button class="btn btn-large" type="submit" name="submit">Login</button>
+                        </fieldset>
+                    </form>
+                </div -->
+                <div class="center">
+                    <!-- Login form -->
+                    <form class="login-form hide" action="/v2/login.json" method="post">
+                        <p class="lead">Login</p>
+                            <label for="login">IB Username</label>
+                            <input type="text" name="user-name" id="user-name" placeholder="IB Username" required>
+                            <label for="password">IB Password</label>
+                            <input type="password" name="password" id="password" placeholder="IB Password" required>
+                            <br></br>
+                            <button class="btn btn-warning" type="submit" name="submit">Login</button>
+                    </form>
+
+                   <form class="logout-form hide" action="/v2/logout.json" method="post">
+                        <h2 class="lead">Welcome <span class="logged-in-user-name"></span></h2>
+                        <p>You have successfully logged into the Interactive Brokers</p>
+                        <button class="btn btn-warning" type="submit" name="submit" id="logout-btn">Logout</button>
+                    </form>
+
+                    <!-- Status dialog -->
+                    <div class="well" id="status-dialog">
+                        <div class="progress progress-striped active">
+                            <div class="bar" style="width: 100%;"></div>
+                        </div>
+                        <p>Retrieving the status information..</p>
+                        <input class="btn btn-warning cancel-btn hide" type="button" name="submit" value="Cancel">
+                    </div>
+                    <!-- Confirmation dialog -->
+                    <div class="well hide" id="confirm-dialog">
+                        <button type="button" class="close no-btn" data-dismiss="alert">&times;</button>
+                        <h4>Logout!</h4>
+                        <p class="text">Best check yo self, you're not...</p>
+                        <button class="btn btn-warning yes-btn">Yes! I want to Logout</button>
+                        <!-- button class="btn">No</button -->
+                    </div>
+                    <!-- Logs -->
+                    <div class="logs">
+                        <!-- Popups -->
+                        <div id="mlog" class="mlog ui-2"></div>
+                        <!-- Popups -->
+                        <div id="popups" class="popups ui-2"></div>
+                    </div>
+                    <!-- Timestamp -->
+                    <div id="timestamp" class="timestamp hide"><hr><small class="text"></small></div>
+                </div>
+            </div>
+        </div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script src="./js/ib.js"></script>
+        <script src="./js/dialog.js"></script>
+        <script src="./js/popup.js"></script>
+        <script src="./js/xhr.js"></script>
+        <script src="./js/string.js"></script>
+        <script src="./js/login.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                IB.Login.init();
+            });
+        </script>
+    </body>
+</html>

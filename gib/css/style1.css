@@ -1,0 +1,25 @@
+.container .center {
+    width:280px;
+    margin: 0 auto;
+}
+h1 {
+    font-size: 26px;
+}
+.support-links {
+    margin-bottom: 0;
+    margin-top: -18px;
+}
+.support-links li a {
+    border: 1px solid #EEEEEE;
+}
+button.close {
+    border: 1px solid #444;
+    padding: 0px 3px;
+    border-radius: 5px;
+}
+.hide {
+    display: none;
+}
+.timestamp hr {
+    margin-bottom: 2px;
+}
