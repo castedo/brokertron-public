@@ -118,7 +118,16 @@
             },
 
             destroy : function () {
-                this.contanier.html('');
+                var i,
+                    dlg,
+                    dlgs = this.dialogs;
+                for (i in dlgs) {
+                    dlg = dlgs[i];
+                    if (dlg && dlg.destroy) {
+                        dlg.destroy();
+                    }
+                }
+                this.contanier.empty();
                 this.dialogs = {};
                 this.removed = {};
             }
