@@ -1,54 +1,95 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <style type="text/css">
 body {
   font-family: sans-serif;
+}
+div {
   text-align: center;
-  background-color:#dfd;
+}
+fieldset {
+  margin: 0.5em 0;
 }
 </style>
 <title>Brokertron Gateway for IB</title>
 </head>
 <body>
 
-<div><a href="/v1/status.json" target="output">Status</a></div>
+<ul>
+  <li><a href="/ui/" target="_top">Modern View</a></li>
+  <li><a href="webapi.html" target="_top">Web API View</a></li>
+  <li><a href="webapi_frameset.html" target="_top">Web API Framed View</a></li>
+</ul>
 
-<hr>
-
-<form action="/v1/login.json" method="post" target="output" autocomplete="off">
 <fieldset>
+<legend>GET /v1/status.json</legend>
+<div><a href="/v1/status.json.txt" target="output">Status</a></div>
+</fieldset>
+
+<form action="/v1/dismiss_popup.json.txt" method="post" target="output">
+<fieldset>
+<legend>POST /v1/dismiss_popup.json</legend>
+<div>wid<input type="text" name="wid"/></div>
+<div><input type="submit" value="Dismiss"/></div>
+</fieldset>
+</form>
+
+<fieldset>
+<legend>GET /v1/mlog.json</legend>
+<div><a href="/v1/mlog.json.txt" target="output">Message Log</a></div>
+</fieldset>
+
+<form action="/v1/mlog_deflag.json.txt" method="post" target="output">
+<fieldset>
+<legend>POST /v1/mlog_deflag.json</legend>
+<div>mid<input type="text" name="mid"/></div>
+<div><input type="submit" value="Dismiss"/></div>
+</fieldset>
+</form>
+
+<form action="/v1/login.json.txt" method="post" target="output">
+<fieldset>
+<legend>POST /v1/login.json</legend>
 <div>IB Username <input type="text" name="username"/></div>
 <div>IB Password <input type="password" name="password"/></div>
 <div><input type="submit" value="Login"/></div>
 </fieldset>
 </form>
 
-<hr>
-
-<div><a href="/v2/challenge.png" target="output">Challenge Image</a></div>
-
-<hr>
-
-<form action="/v1/response.json" method="post" target="output" autocomplete="off">
 <fieldset>
+<legend>GET /v1/challenge.png</legend>
+<div><a href="/v1/challenge.png" target="output">Challenge Image</a></div>
+</fieldset>
+
+<form action="/v1/response.json.txt" method="post" target="output">
+<fieldset>
+<legend>POST /v1/response.json</legend>
 <div>Security Response <input type="text" name="response"/></div>
 <div><input type="submit" value="Respond"/></div>
 </fieldset>
 </form>
 
-<hr>
-
-<form action="/v1/logout.json" method="post" target="output">
+<form action="/v1/logout.json.txt" method="post" target="output">
 <fieldset>
+<legend>POST /v1/logout.json</legend>
 <div><input type="submit" value="Logout"/></div>
 </fieldset>
 </form>
 
-<hr>
+<fieldset>
+<legend>GET /vx/internals.json</legend>
+<div><a href="/vx/internals.json.txt" target="output">Internals</a></div>
+</fieldset>
 
-<a href="/vx/internals.json" target="output">Internals</a>
+<form action="/vx/mlog_test.json.txt" method="post" target="output">
+<fieldset>
+<legend>POST /vx/mlog_test.json</legend>
+<div>Summary <input type="text" name="summary"/></div>
+<div><input type="submit" value="Log"/></div>
+</fieldset>
+</form>
 
 </body>
 </html>
