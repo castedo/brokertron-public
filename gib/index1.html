@@ -2,7 +2,6 @@
 <html>
     <head>
         <title>Interactive Brokers Login</title>
-        <!-- link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:light&v1' rel='stylesheet' type='text/css' -->
         <link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css' rel='stylesheet' type='text/css'>
         <!-- link href='http://bootswatch.com/cyborg/bootstrap.min.css' rel='stylesheet' type='text/css' -->
         <link rel="stylesheet" href="./css/style1.css">
@@ -45,17 +44,17 @@
                 <div class="center">
                     <!-- Login form -->
                     <form class="login-form hide" action="/v2/login.json" method="post">
-                        <p class="lead">Login</p>
-                            <label for="login">IB Username</label>
-                            <input type="text" name="user-name" id="user-name" placeholder="IB Username" required>
-                            <label for="password">IB Password</label>
-                            <input type="password" name="password" id="password" placeholder="IB Password" required>
-                            <br></br>
-                            <button class="btn btn-warning" type="submit" name="submit">Login</button>
+                        <legend class="lead">Login</legend>
+                        <label for="login">IB Username</label>
+                        <input type="text" name="user-name" id="user-name" placeholder="IB Username" required>
+                        <label for="password">IB Password</label>
+                        <input type="password" name="password" id="password" placeholder="IB Password" required>
+                        <br></br>
+                        <button class="btn btn-warning" type="submit" name="submit">Login</button>
                     </form>
 
                    <form class="logout-form hide" action="/v2/logout.json" method="post">
-                        <h2 class="lead">Welcome <span class="logged-in-user-name"></span></h2>
+                        <legend class="lead">Welcome <span class="logged-in-user-name"></span></legend>
                         <p>You have successfully logged into the Interactive Brokers</p>
                         <button class="btn btn-warning" type="submit" name="submit" id="logout-btn">Logout</button>
                     </form>
@@ -65,7 +64,7 @@
                         <div class="progress progress-striped active">
                             <div class="bar" style="width: 100%;"></div>
                         </div>
-                        <p>Retrieving the status information..</p>
+                        <p class="text">Retrieving the status information..</p>
                         <input class="btn btn-warning cancel-btn hide" type="button" name="submit" value="Cancel">
                     </div>
                     <!-- Confirmation dialog -->
