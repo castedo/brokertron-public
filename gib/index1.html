@@ -2,29 +2,35 @@
 <html>
     <head>
         <title>Interactive Brokers Login</title>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css' rel='stylesheet' type='text/css'>
+        <!-- link href='//netdna.bootstrapcdn.com/bootswatch/2.1.1/cosmo/bootstrap.min.css' rel='stylesheet' type='text/css' -->
         <!-- link href='http://bootswatch.com/cyborg/bootstrap.min.css' rel='stylesheet' type='text/css' -->
         <link rel="stylesheet" href="./css/style1.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     </head>
     <body>
         <div class="container">
-            <h1 class="center">Interactive Brokers</h1>
-
-            <div class="center">
-                <!-- Support links -->
-                <ul class="nav nav-pills pull-right support-links">
-                    <li>
-                        <a id="help-link" target="gib_help" title="Brokertron Gateway for IB Help" href="http://www.brokertron.com/gateway/help.html">Help</a>
-                    </li>
-                    <li>
-                        <a id="webapi-link" title="Brokertron Gateway for IB - API View" href="webapi.html">Web API</a>
-                    </li>
-                    <li>
-                        <a id="log-link" target="_blank" title="Message log" href="/v2/status.json.txt">Log</a>
-                    </li>
-                </ul>
-                <hr></hr>
+            <!-- h1 class="center">Interactive Brokers</h1 -->
+            <div class="navbar-placeholder"></div>
+            <!-- Support links -->
+            <div class="navbar navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="center">
+                        <a class="brand" href="/ui/index1.html">IB</a>
+                        <ul class="nav support-links">
+                            <li>
+                                <a id="help-link" target="gib_help" title="Brokertron Gateway for IB Help" href="http://www.brokertron.com/gateway/help.html">Help</a>
+                            </li>
+                            <li>
+                                <a id="webapi-link" title="Brokertron Gateway for IB - API View" href="webapi.html">Web API</a>
+                            </li>
+                            <li>
+                                <a id="log-link" target="_blank" title="Message log" href="/v2/status.json.txt">Log</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <!-- div class="ruler"></div -->
@@ -43,20 +49,20 @@
                 </div -->
                 <div class="center">
                     <!-- Login form -->
+                    <h2 class="page-header">IB Login</h2>
                     <form class="login-form hide" action="/v2/login.json" method="post">
-                        <legend class="lead">Login</legend>
-                        <label for="login">IB Username</label>
+                        <label for="user-name">IB Username</label>
                         <input type="text" name="user-name" id="user-name" placeholder="IB Username" required>
                         <label for="password">IB Password</label>
                         <input type="password" name="password" id="password" placeholder="IB Password" required>
                         <br></br>
-                        <button class="btn btn-warning" type="submit" name="submit">Login</button>
+                        <button class="btn btn-primary" type="submit" name="submit">Login</button>
                     </form>
 
                    <form class="logout-form hide" action="/v2/logout.json" method="post">
-                        <legend class="lead">Welcome <span class="logged-in-user-name"></span></legend>
+                        <h2 class="lead">Welcome <span class="logged-in-user-name"></span></h2>
                         <p>You have successfully logged into the Interactive Brokers</p>
-                        <button class="btn btn-warning" type="submit" name="submit" id="logout-btn">Logout</button>
+                        <button class="btn btn-primary" type="submit" name="submit" id="logout-btn">Logout</button>
                     </form>
 
                     <!-- Status dialog -->
@@ -65,14 +71,14 @@
                             <div class="bar" style="width: 100%;"></div>
                         </div>
                         <p class="text">Retrieving the status information..</p>
-                        <input class="btn btn-warning cancel-btn hide" type="button" name="submit" value="Cancel">
+                        <input class="btn btn-danger cancel-btn hide" type="button" name="submit" value="Cancel">
                     </div>
                     <!-- Confirmation dialog -->
                     <div class="well hide" id="confirm-dialog">
                         <button type="button" class="close no-btn" data-dismiss="alert">&times;</button>
                         <h4>Logout!</h4>
                         <p class="text">Best check yo self, you're not...</p>
-                        <button class="btn btn-warning yes-btn">Yes! I want to Logout</button>
+                        <button class="btn btn-danger yes-btn">Yes! I want to Logout</button>
                         <!-- button class="btn">No</button -->
                     </div>
                     <!-- Logs -->

@@ -26,7 +26,7 @@
                 }
                 el.appendTo(parent);
                 if (parent.hasClass('ui-2')) {
-                    el.html('<button type="button" class="close no-btn" data-dismiss="alert">&times;</button><h4>'+title+'</h4><p class="text">'+content+'</p>');
+                    el.html('<button type="button" class="close text-warning no-btn" data-dismiss="alert">&times;</button><h4>'+title+'</h4><p class="text">'+content+'</p>');
                 }
                 else {
                     el.html('<div class="head"><h3 class="title">'+title+'</h3><button class="input-btn close">x</button></div><p class="content">'+content+'</p>');

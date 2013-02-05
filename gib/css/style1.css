@@ -1,16 +1,20 @@
+body {
+    font-family: "Open Sans",Calibri,Candara,Arial,sans-serif;
+}
 .container .center {
     width:280px;
     margin: 0 auto;
 }
-h1 {
-    font-size: 26px;
+.navbar-fixed-top {
+    position: fixed;
 }
-.support-links {
-    margin-bottom: 0;
-    margin-top: -18px;
+.navbar-placeholder {
+    min-height: 50px;
+    height: 50px;
 }
-.support-links li a {
-    border: 1px solid #EEEEEE;
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 300;
+    line-height: 1;
 }
 button.close {
     border: 1px solid #444;
