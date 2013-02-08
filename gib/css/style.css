@@ -72,18 +72,13 @@ a:link, a:visited, a:active {
 
 .centered .logs {
     font-size: 0.75em;
-    padding: 15.2em 0.3em 2.1em 0.3em;
+    padding: 0.3em 0.3em 2.1em 0.3em;
 }
 
 .centered .dlg {
     text-align: center;
-    margin-left: -11em;
     padding: 1em 0 1em 0;
     font-weight: normal;
-    position: absolute;
-    top: 4em;
-    left: 50%;
-    width: 100%;
 }
 
 .centered .dlg .input-btn {
@@ -98,6 +93,14 @@ a:link, a:visited, a:active {
 
 .centered .spinner {
     background: url(../images/252.gif) no-repeat 50% 0;
+    text-align: center;
+    padding-top: 1.2em;
+    margin-top: 4em;
+}
+
+.centered .status {
+    padding-top: 4em;
+    text-align: center;
 }
 
 .centered h1 {
@@ -151,7 +154,6 @@ a:link, a:visited, a:active {
 
 .action-form {
     padding: 1em;
-    position: absolute;
 }
 
 .action-form input[type=text],
@@ -284,12 +286,8 @@ and (max-device-width : 480px) {
 and (min-width : 321px) {
     /* Styles */
     .centered {
-        width: 96%;
+        width: 90%;
         margin: 2% 2%;
-    }
-    .centered .dlg {
-        top: 5em;
-        margin-left: -14em;
     }
 }
 
@@ -298,14 +296,8 @@ and (min-width : 321px) {
 and (max-width : 320px) {
     /* Styles */
     .centered {
-        width: 95%;
+        width: 92%;
         margin: 5% 3%;
-    }
-
-    .centered .dlg {
-        top: 5em;
-        left: 0;
-        margin-left: 0;
     }
 }
 
@@ -315,12 +307,7 @@ and (min-width : 481px) {
     /* Styles */
     .centered {
         width: 23em;
-        margin: 4.62em auto 2.31em;
-    }
-    .centered .dlg {
-        margin-left: -11em;
-        left: 50%;
-        top: 5em;
+        margin: 2% auto 2.31em;
     }
 }
 

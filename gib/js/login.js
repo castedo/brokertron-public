@@ -88,6 +88,8 @@
         login : function(e) {
             e.preventDefault();
             e.stopPropagation();
+            this.popup.destroy();
+            this.mLog.destroy();
             var userName = $("#user-name").val(),
                 passwd = $("#password").val(),
                 request = {
@@ -117,11 +119,12 @@
 
         logoutConfirm : function (e) {
             IB.Util.Xhr.abort();
-            this.popup.hide();
-            this.mLog.hide();
+            this.popup.destroy();
+            this.mLog.destroy();
             $(CONFIRM_DIALOG).hide(SHOW_HIDE_INTERVAL);
             if (e) {
                 e.preventDefault();
+                e.stopPropagation();
             }
             IB.Util.Xhr.send({
                 type : 'POST',

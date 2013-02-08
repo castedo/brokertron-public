@@ -8,29 +8,33 @@
                     type = params.type || "info",
                     content = params.content || "",
                     closeCallback = params.closeCallback || null,
-                    el;
-                this.container = el = $('<div class="alert"></div>');
+                    el,
+                    className;
+
                 switch (type) {
                     case "error":
-                        el.addClass('alert-error');
+                        className = 'alert-error';
                         break;
                     case "warning" :
-                        el.addClass('alert-block');
+                        className = 'alert-block';
                         break;
                     case "success" :
-                        el.addClass("alert-success");
+                        className = "alert-success";
                         break;
                     default :
-                        el.addClass("alert-info");
+                        className = "alert-info";
                         break;
                 }
-                el.appendTo(parent);
+                this.container = el = $('<div class="alert"></div>');
                 if (parent.hasClass('ui-2')) {
                     el.html('<button type="button" class="close text-warning no-btn" data-dismiss="alert">&times;</button><h4>'+title+'</h4><p class="text">'+content+'</p>');
+                    el.addClass("alert "+className);
                 }
                 else {
                     el.html('<div class="head"><h3 class="title">'+title+'</h3><button class="input-btn close">x</button></div><p class="content">'+content+'</p>');
+                    el.addClass("dialog "+className);
                 }
+                el.appendTo(parent);
                 el.on('click', $.proxy(this.click, this, closeCallback));
                 this.show();
             },
@@ -44,6 +48,7 @@
             },
 
             destroy : function () {
+                this.container.remove();
             },
 
             click : function (callback, e) {
