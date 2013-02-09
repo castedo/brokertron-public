@@ -65,7 +65,7 @@
                     dlg.render({
                         type : popup.mid ? "error" : "warning",
                         parent : this.contanier,
-                        title : popup.title || popup.category,
+                        title : popup.title,
                         closeCallback : $.proxy(this.close, this, dialogId),
                         content : (popup.content ? this.joinContent(popup.content) : popup.summary)
                     });

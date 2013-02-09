@@ -16,10 +16,8 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
     line-height: 1;
 }
-button.close {
-    border: 1px solid #444;
-    padding: 0px 3px;
-    border-radius: 5px;
+.alert h4 {
+    margin-bottom: 8px;
 }
 .hide {
     display: none;
