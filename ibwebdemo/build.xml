@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="gatekeeper">
+    <fail message="Please build using Ant 1.7.0 or higher.">
+        <condition><not><antversion atleast="1.7.0"/></not></condition>
+    </fail>
+    <target name="clean">
+        <delete dir="build"/>
+        <delete dir="dist"/>
+    </target>
+    <target name="compile">
+        <fail unless="jtsclient.dir">
+           Ant property 'jtsclient.dir' not set.
+           Usage:
+             ant -Djtsclient.dir=/path/to/ibapi/dir/
+        </fail>
+        <mkdir dir="build"/>
+        <javac debug="true" debuglevel="source,lines,vars" destdir="build" source="1.6" target="1.6">
+            <src path="WEB-INF/classes/"/>
+            <classpath>
+                <pathelement location="/usr/share/java/servlet.jar"/>
+                <pathelement location="${jtsclient.dir}/jtsclient.jar"/>
+            </classpath>
+        </javac>
+    </target>
+    <target name="build" depends="compile">
+        <mkdir dir="dist"/>
+        <war destfile="dist/ibwebdemo.war" webxml="WEB-INF/web.xml">
+            <classes dir="build"/>
+            <fileset dir=".">
+                <filename name="style.css"/>
+            </fileset>
+            <fileset dir=".">
+                <filename name="WEB-INF/index.jsp"/>
+            </fileset>
+            <lib dir="${jtsclient.dir}">
+                <filename name="jtsclient.jar"/>
+            </lib>
+        </war>
+    </target>
+</project>

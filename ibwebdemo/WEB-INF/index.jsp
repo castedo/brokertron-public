@@ -28,11 +28,11 @@
 
 <% if (!connected && !connecting) { %>
 <p>Make sure to log in to IB before connecting this demo web application to the IB API.</p>
+<% } %>
 <p>
-Log in securely from <a href="https://<%=host%>:18080/ui/" target="gib">https://<%=host%>:18080/ui/</a> using
+Log in and out of IB securely from <a href="https://<%=host%>:18080/ui/" target="gib">https://<%=host%>:18080/ui/</a> using
 <a href="http://www.brokertron.com/gateway/" target="_blank">Brokertron Gateway for IB</a> installed on this server.
 </p>
-<% } %>
 
 <% if (connected || connecting) { %>
 
