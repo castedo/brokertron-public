@@ -94,7 +94,7 @@
                 passwd = $("#password").val(),
                 request = {
                     type : 'POST',
-                    url : '/v2/login.json',
+                    url : '/v1/login.json',
                     data : {
                         username : userName,
                         password : passwd
@@ -128,7 +128,7 @@
             }
             IB.Util.Xhr.send({
                 type : 'POST',
-                url : '/v2/logout.json',
+                url : '/v1/logout.json',
                 contentType: "application/x-www-form-urlencoded",
                 dataType: "json",
                 success : $.proxy(this.logoutSuccess, this)
@@ -151,7 +151,7 @@
                 }
             }
             IB.Util.Xhr.send({
-                url : '/v2/status.json',
+                url : '/v1/status.json',
                 success : $.proxy(this.processStatus, this)
             });
         },

@@ -55,7 +55,7 @@
                 this.markAllRemoved();
                 for (i in popups) {
                     popup = popups[i];
-                    id = popup.mid || i;
+                    id = popup.mid || popup.wid;
                     if (this.dialogs[id]) {
                         this.removed[id] = false;
                         continue;
@@ -93,14 +93,14 @@
                     reqData = {
                         wid : id
                     };
-                    closeUrl = '/v2/dismiss_popup.json';
+                    closeUrl = '/v1/dismiss_popup.json';
                 }
                 else {
                     id = dialogId.mid;
                     reqData = {
                         mid : id
                     };
-                    closeUrl = '/v2/mlog_deflag.json';
+                    closeUrl = '/v1/mlog_deflag.json';
                 }
                 IB.Util.Xhr.send({
                     type : 'POST',
