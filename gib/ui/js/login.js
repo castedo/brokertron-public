@@ -103,6 +103,7 @@
                     dataType: "json",
                     success : $.proxy(this.loginSuccess, this)
                 };
+            this.attempts = 0;
             IB.Util.Xhr.send(request);
             this.updateStatus(MSG_LOGIN, true);
         },
