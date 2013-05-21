@@ -1,7 +1,7 @@
 Summary:   Brokertron Gateway for IB User Interface
 Name:      gibui 
-Version:   3.0
-Release:   1
+Version:   3.1
+Release:   0
 BuildArch: noarch
 License:   Copyfree
 Vendor:    Castedo Ellerman LLC
