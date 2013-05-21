@@ -10,6 +10,9 @@
 <head>
 <title>IB API Demo Web Application</title>
 <link href="style.css" type="text/css" rel="stylesheet"/>
+<% if (connecting) { %>
+  <meta http-equiv="refresh" content="1">
+<% } %>
 </head>
 <body>
 <h1>IB API Demo Web Application</h1>
