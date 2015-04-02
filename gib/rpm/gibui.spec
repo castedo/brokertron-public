@@ -1,6 +1,6 @@
 Summary:   Brokertron Gateway for IB User Interface
 Name:      gibui 
-Version:   3.1
+Version:   3.2
 Release:   0
 BuildArch: noarch
 License:   Copyfree
@@ -29,6 +29,8 @@ rm -r "$RPM_BUILD_ROOT"
 
 
 %changelog
+* Thu Apr 2 2015 Castedo Ellerman <castedo@castedo.com>
+  Correct WebAPI URLs to use v1, not v2
 * Fri Feb 8 2013 Castedo Ellerman <castedo@castedo.com>
   Thank you stackoverflow.com.
 

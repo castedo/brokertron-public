@@ -26,7 +26,7 @@
                                 <a id="webapi-link" title="Brokertron Gateway for IB - API View" href="webapi.html">Web API</a>
                             </li>
                             <li>
-                                <a id="log-link" target="_blank" title="Message log" href="/v2/mlog.json.txt">Log</a>
+                                <a id="log-link" target="_blank" title="Message log" href="/v1/mlog.json.txt">Log</a>
                             </li>
                         </ul>
                     </div>
@@ -50,7 +50,7 @@
                 <div class="center">
                     <!-- Login form -->
                     <h2 class="page-header">IB Login</h2>
-                    <form class="login-form hide" action="/v2/login.json" method="post">
+                    <form class="login-form hide" action="/v1/login.json" method="post">
                         <label for="user-name">IB Username</label>
                         <input type="text" name="user-name" id="user-name" placeholder="IB Username" required>
                         <label for="password">IB Password</label>
@@ -59,7 +59,7 @@
                         <button class="btn btn-primary" type="submit" name="submit">Login</button>
                     </form>
 
-                   <form class="logout-form hide" action="/v2/logout.json" method="post">
+                   <form class="logout-form hide" action="/v1/logout.json" method="post">
                         <h2 class="lead">Welcome <span class="logged-in-user-name"></span></h2>
                         <p>You have successfully logged into the Interactive Brokers</p>
                         <button class="btn btn-primary" type="submit" name="submit" id="logout-btn">Logout</button>
