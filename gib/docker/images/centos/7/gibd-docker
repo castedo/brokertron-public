@@ -1,0 +1,7 @@
+#!/bin/bash
+set -e
+
+/usr/share/gib/testcertgen
+
+runuser -u daemon ./gibd-docker-daemons
+

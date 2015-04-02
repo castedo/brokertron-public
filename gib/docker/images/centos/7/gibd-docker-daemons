@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+
+ncat --keep-open --listen \
+     --sh-exec 'ncat 127.0.0.1 4001' \
+     0.0.0.0 $OPENIBAPIPORT &
+
+/usr/sbin/gibd --stay
+
