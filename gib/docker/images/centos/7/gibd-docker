@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+find /tmp -delete -mindepth 1
+
 /usr/share/gib/testcertgen
 
 runuser -u daemon ./gibd-docker-daemons
