@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 
-find /tmp -delete -mindepth 1
+find /tmp -mindepth 1 -delete 
 
 /usr/share/gib/testcertgen
 
-runuser -u daemon ./gibd-docker-daemons
+exec runuser -u daemon ./gibd-docker-daemons
 
