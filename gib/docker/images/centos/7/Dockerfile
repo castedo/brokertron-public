@@ -1,15 +1,15 @@
 FROM brokertron/centos:7
 MAINTAINER Castedo Ellerman <castedo@castedo.com>
 
-RUN yum install -y nmap-ncat
 RUN yum install -y gib gibui
+RUN yum install -y nmap-ncat
 
-EXPOSE 18080
+# 4001 = IB API
+# 18080 = Brokertron Web API
+EXPOSE 4001 18080
 
-EXPOSE 4002
-ENV OPENIBAPIPORT 4002
+COPY config.json /etc/gib/config.json
 
-COPY gibd-docker gibd-docker-daemons /
-
-CMD ["/gibd-docker"]
+COPY enter-gateway /root/enter-gateway
+ENTRYPOINT ["/root/enter-gateway"]
 

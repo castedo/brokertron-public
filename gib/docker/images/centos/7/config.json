@@ -1,0 +1,17 @@
+{
+    "tsmap_config":{
+        "iport_config":{
+            "port":18080,
+            "insecure":true
+        },
+        "doc_root":"/usr/share/gib/ui/",
+        "shell_cmd":"/usr/share/gib/gatekeeper-launch",
+        "ibapi_port":4001,
+        "ibapi_client_id":99
+    },
+    "tape_config":{
+        "raw_tapes":0,
+        "gut_tapes":2
+    },
+    "restorage":"/var/lib/gib/restorage/"
+}
