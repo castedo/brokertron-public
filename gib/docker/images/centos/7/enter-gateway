@@ -17,6 +17,6 @@ else:
                  "--sh-exec 'ncat 127.0.0.1 4001' " +
                  "0.0.0.0 4002 &")
 
-cmdline = ["/usr/sbin/gibd", "--stay"]
+cmdline = ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
 os.execvp(cmdline[0], cmdline)
 
