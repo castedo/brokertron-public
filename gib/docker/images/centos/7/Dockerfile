@@ -21,5 +21,3 @@ RUN echo | vncpasswd -f > /var/lib/gib/vnc-passwd
 COPY enter-gateway /root/enter-gateway
 ENTRYPOINT ["/root/enter-gateway"]
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
-
