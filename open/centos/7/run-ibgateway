@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -o errexit
+
+export DISPLAY=:0
+export XAUTHORITY=/var/ibgateway/.Xauthority
+cd /var/ibgateway
+echo Running Java ... 1>&2
+JAVA=java
+if [[ -x /etc/gib/java ]]; then
+  JAVA=/etc/gib/java
+fi
+$JAVA -client -Xmx128M -Dsun.java2d.noddraw=true \
+     -cp "/usr/share/ibgateway/*" \
+     ibgateway.GWClient /var/ibgateway
